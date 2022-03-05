@@ -8,7 +8,7 @@ class Invoice < ApplicationRecord
     pending: 0, approved: 0, decline: 3
   }
 
-  has_many :invoice_items
+  has_many :invoice_items, dependent: :destroy
 
-  accepts_nested_attributes_for(:invoice_items)
+  accepts_nested_attributes_for :invoice_items, allow_destroy: true
 end
