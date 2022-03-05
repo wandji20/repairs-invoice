@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :invoices, only: [:create, :index, :new]
-  devise_for :users
 
   root 'invoices#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  get 'logout', to: 'sessions#destroy'
+  resources :users, only: [:create, :new]
+  resources :sessions, only: [:create, :new]
+  
+  resources :invoices, only: [:create, :index, :new]
+  
 end
