@@ -1,2 +1,33 @@
-<h1>Invoices#new</h1>
-<p>Find me in app/views/invoices/new.html.erb</p>
+<div class="container">
+  <h3>New Invoice</h3>
+  <%= form_with model: @invoice do |f| %>
+    <div>
+       <div class="field mb-3">
+        <%= f.label :select_user, class: "form-label mb-2" %><br />
+        <%= f.collection_select :user_id, User.all, :id, :username, class: "custom-select " %>
+      </div>
+      <div class="field mb-3">
+        <%= f.label :name, class: "form-label" %><br />
+        <%= f.text_field :name, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+      <div class="field mb-3">
+        <%= f.label :email, class: "form-label" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+    </div>
+
+    <div>
+        <%= f.fields_for :invoice_item do |ff| %>
+          <div class="field mb-3">
+            <%= ff.label :select_part, class: '"form-control mb-2' %> <br />
+            <%= ff.collection_select :part_id, Part.all, :id, :name, class: '' %>
+          </div>
+        <% end %>
+    </div>
+
+
+    <div class="actions">
+      <%= f.submit "Create", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
