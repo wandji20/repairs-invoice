@@ -7,4 +7,6 @@ class Invoice < ApplicationRecord
   enum status: {
     pending: 0, approved: 0, decline: 3
   }
+
+  has_many :invoice_items
 end
