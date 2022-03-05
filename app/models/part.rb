@@ -5,6 +5,7 @@ class Part < ApplicationRecord
   validates :price, :total, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   private
+
   def downcase_name
     self.name = name.downcase
   end

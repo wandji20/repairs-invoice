@@ -9,5 +9,5 @@ class InvoiceItem < ApplicationRecord
 
   def set_subtotal
     unit_price * quantity
-  end 
+  end
 end
