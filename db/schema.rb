@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_05_100910) do
+ActiveRecord::Schema.define(version: 2022_03_05_102646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invoice_items", force: :cascade do |t|
+    t.integer "quantity", default: 0
+    t.float "subtotal"
+    t.bigint "part_id", null: false
+    t.bigint "invoice_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
+    t.index ["part_id"], name: "index_invoice_items_on_part_id"
+  end
 
   create_table "invoices", force: :cascade do |t|
     t.string "name"
@@ -48,5 +59,7 @@ ActiveRecord::Schema.define(version: 2022_03_05_100910) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "invoice_items", "invoices"
+  add_foreign_key "invoice_items", "parts"
   add_foreign_key "invoices", "users"
 end
