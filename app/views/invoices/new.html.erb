@@ -2,18 +2,34 @@
   <h3>New Invoice</h3>
   <%= form_with model: @invoice do |form| %>
     <%= render "shared/error_messages", resource: @invoice %>
-    <div>
+    <div data-controller="populate-name-email">
        <div class="field mb-3">
-        <%= form.label :select_user, class: "form-label mb-2" %><br />
-        <%= form.collection_select :user_id, User.all, :id, :username, class: "custom-select " %>
+        <%= form.label :select_user, 
+                class: "form-label mb-2"
+        %><br />
+        <%= form.collection_select :user_id, User.all, :email, :username, 
+          {class: "custom-select "}, 
+          "data-populate-name-email-target": "user",
+          data: {action: "populate-name-email#populate"}
+        %>
       </div>
       <div class="field mb-3">
         <%= form.label :name, class: "form-label" %><br />
-        <%= form.text_field :name, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= form.text_field :name, 
+                    autofocus: true,
+                    autocomplete: "email",
+                    class: "form-control",
+                    'data-populate-name-email-target': "name"
+        %>
       </div>
       <div class="field mb-3">
         <%= form.label :email, class: "form-label" %><br />
-        <%= form.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= form.email_field :email, 
+          autofocus: true,
+          autocomplete: "email", 
+          class: "form-control",
+          'data-populate-name-email-target': "email"
+        %>
       </div>
     </div>
     <h4>Parts</h4>
