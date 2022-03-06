@@ -3,14 +3,25 @@ class InvoicesController < ApplicationController
 
   def index; end
 
-  def create; end
+  def create
+    @invoice = Invoice.new(invoice_params)
+    if @invoice.save
+      flash[:notice] = 'Invoice successfully crreated'
+      redirect_to root_path
+    else
+      flash[:alert] = 'Something went wrong'
+      render :new
+    end
+  end
 
-  def new; end
+  def new
+    @invoice = Invoice.new
+  end
 
   private
 
   def invoice_params
-    params.require(:invoice).permit(:name, :email, invoice_attributes: [ :_destroy, :part_id])
+    params.require(:invoice).permit(:user_id, :name, :email, invoice_items_attributes: [ :_destroy, :id, :part_id, :quantity])
   end
 
   def verify_admin

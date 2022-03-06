@@ -8,6 +8,6 @@ class InvoiceItem < ApplicationRecord
   delegate :price, to: :part, prefix: 'unit'
 
   def set_subtotal
-    unit_price * quantity
+    self.subtotal = unit_price * quantity
   end
 end

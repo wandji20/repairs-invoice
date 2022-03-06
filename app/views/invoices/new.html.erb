@@ -1,33 +1,41 @@
-<div class="container " data-controller="nested-form">
+<div class="container ">
   <h3>New Invoice</h3>
-  <%= form_with model: @invoice do |f| %>
+  <%= form_with model: @invoice do |form| %>
+    <%= render "shared/error_messages", resource: @invoice %>
     <div>
        <div class="field mb-3">
-        <%= f.label :select_user, class: "form-label mb-2" %><br />
-        <%= f.collection_select :user_id, User.all, :id, :username, class: "custom-select " %>
+        <%= form.label :select_user, class: "form-label mb-2" %><br />
+        <%= form.collection_select :user_id, User.all, :id, :username, class: "custom-select " %>
       </div>
       <div class="field mb-3">
-        <%= f.label :name, class: "form-label" %><br />
-        <%= f.text_field :name, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= form.label :name, class: "form-label" %><br />
+        <%= form.text_field :name, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
       <div class="field mb-3">
-        <%= f.label :email, class: "form-label" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        <%= form.label :email, class: "form-label" %><br />
+        <%= form.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
     </div>
-
-    <div>
-        <%= f.fields_for :invoice_item do |ff| %>
-          <div class="field mb-3">
-            <%= ff.label :select_part, class: '"form-control mb-2' %> <br />
-            <%= ff.collection_select :part_id, Part.all, :id, :name, class: '' %>
-          </div>
+    <h4>Parts</h4>
+    <div data-controller="nested-form">
+      <template data-nested-form-target="template">
+        <%= form.fields_for :invoice_items, InvoiceItem.new, child_index: 'TEMPLATE_RECORD' do |invoice_item| %>
+          <%= render 'invoice_item_field', form: invoice_item %>
         <% end %>
+      </template>
+
+      <%= form.fields_for :invoice_items do |invoice_item| %>
+        <%= render 'invoice_item_field', form: invoice_item %>
+      <% end %>
+
+      <div data-nested-form-target="add_invoice_item" class="w-100 text-end">
+        <%= link_to 'Add Part', '#', data: { action: "click->nested-form#add_association"}, class: 'btn btn-primary text-decoration-none text-light' %>
+      </div>
     </div>
 
 
-    <div class="actions">
-      <%= f.submit "Create", class: "btn btn-primary" %>
+    <div class="actions mt-3">
+      <%= form.submit "Create", class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>

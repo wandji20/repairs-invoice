@@ -1,0 +1,20 @@
+<div class="nested-field">
+  <div class="form-group">
+    <div>
+      <%= form.hidden_field :_destroy %>
+    </div>
+    <div class="">
+      <%= form.label :select_part, class: '' %> <br />
+      <%= form.collection_select :part_id, Part.all, :id, :name, class: '' %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :quantity, class: '' %><br>
+      <%= form.number_field :quantity, class: ''  %>
+    </div>
+
+    <span>
+      <%= link_to 'Remove', "#", data: { action: 'click->nested-form#remove_association'}, class: 'btn btn-danger text-decoration-none text-light p-0 px-1' %>
+    </span>
+  </div>
+</div>
