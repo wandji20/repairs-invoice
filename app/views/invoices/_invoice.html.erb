@@ -1,0 +1,6 @@
+<tr>
+  <th scope="row"><%= invoice.id %></th>
+  <td><%= invoice.name || 'N/A' %></td>
+  <td><%= invoice.email %></td>
+  <td><%= invoice.invoice_items.sum(:subtotal) %></td>
+</tr>

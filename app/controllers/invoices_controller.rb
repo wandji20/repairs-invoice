@@ -1,7 +1,9 @@
 class InvoicesController < ApplicationController
   before_action :verify_admin, except: :index
 
-  def index; end
+  def index
+    @invoices = Invoice.includes(:invoice_items)
+  end
 
   def create
     @invoice = Invoice.new(invoice_params)
