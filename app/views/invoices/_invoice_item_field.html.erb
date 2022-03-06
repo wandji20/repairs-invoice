@@ -1,20 +1,37 @@
-<div class="nested-field">
+<div class="nested-field position-relative border p-1 mb-2">
   <div class="form-group">
     <div>
       <%= form.hidden_field :_destroy %>
     </div>
-    <div class="">
-      <%= form.label :select_part, class: '' %> <br />
-      <%= form.collection_select :part_id, Part.all, :id, :name, class: '' %>
-    </div>
 
     <div class="mb-2">
-      <%= form.label :quantity, class: '' %><br>
-      <%= form.number_field :quantity, class: ''  %>
+      <%= form.label :select_part, class: '' %> <br />
+      <%= form.collection_select :part_id, Part.all, :id, :name, class: 'custom-select' %>
     </div>
 
-    <span>
-      <%= link_to 'Remove', "#", data: { action: 'click->nested-form#remove_association'}, class: 'btn btn-danger text-decoration-none text-light p-0 px-1' %>
-    </span>
+    <div class="mb-2 d-flex flex-wrap">
+        <%= form.label :quantity, class: 'form-label col-12' %><br>
+        <span 
+          class="btn-secondary btn" 
+          data-action="click->invoice-calculations#subtract_quantity"
+        >
+          -
+        </span>
+        <%= form.number_field :quantity,
+          class: 'form-control w-25', 
+          "data-invoice-calculations-target": "quantity" 
+        %>
+        <span 
+          class="btn-secondary btn"
+          data-action="click->invoice-calculations#add_quantity"
+        >
+          +
+        </span>
+    </div>
+
+
   </div>
+  <span class="position-absolute remove-item">
+    <%= link_to 'Remove', "#", data: { action: 'click->nested-form#remove_association'}, class: 'btn btn-danger text-decoration-none text-light p-0 px-1' %>
+  </span>
 </div>
