@@ -7,10 +7,13 @@
         <%= form.label :select_user, 
                 class: "form-label mb-2"
         %><br />
-        <%= form.collection_select :user_id, User.all, :email, :username, 
+        <%= form.select :user_id, 
+          options_for_select( 
+            User.where(admin: false).map {|u| [u.username, u.id, { 'data-email': u.email }]}
+          ), 
           {class: "custom-select "}, 
           "data-populate-name-email-target": "user",
-          data: {action: "populate-name-email#populate"}
+          data: {action: "change->populate-name-email#populate"}
         %>
       </div>
       <div class="field mb-3">

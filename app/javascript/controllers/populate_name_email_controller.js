@@ -5,8 +5,9 @@ export default class extends Controller {
 
   populate() {
     const selectedIndex = this.userTarget.selectedIndex;
-    const email = this.userTarget.value;
-    const name = this.userTarget.options[selectedIndex].text;
+    const selectedOption = this.userTarget.options[selectedIndex]
+    const email = selectedOption.dataset['email'];
+    const name = selectedOption.text;
     this.nameTarget.value = name;
     this.emailTarget.value = email
   };

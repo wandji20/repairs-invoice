@@ -4,7 +4,7 @@ class Invoice < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
 
-  # validate :invoice_items_count
+  validate :invoice_items_count
 
   enum status: {
     pending: 0, approved: 0, decline: 3
