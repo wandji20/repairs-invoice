@@ -13,7 +13,10 @@ class InvoicesController < ApplicationController
       redirect_to root_path
     else
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.update('form-errors', partial: 'shared/error_messages', locals: { resource: @invoice}) }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update('form-errors', partial: 'shared/error_messages',
+                                                                  locals: { resource: @invoice })
+        end
         format.html { render :new }
       end
     end
@@ -26,7 +29,8 @@ class InvoicesController < ApplicationController
   private
 
   def invoice_params
-    params.require(:invoice).permit(:user_id, :name, :email, invoice_items_attributes: [ :_destroy, :id, :part_id, :quantity])
+    params.require(:invoice).permit(:user_id, :name, :email,
+                                    invoice_items_attributes: %i[_destroy id part_id quantity])
   end
 
   def verify_admin

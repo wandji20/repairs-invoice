@@ -12,11 +12,11 @@ class UsersController < ApplicationController
       redirect_to root_path
     else
       respond_to do |format|
-        format.turbo_stream { 
+        format.turbo_stream do
           render turbo_stream: turbo_stream.update(
-            'form-errors', partial: 'shared/error_messages', locals: { resource: @user}
+            'form-errors', partial: 'shared/error_messages', locals: { resource: @user }
           )
-        }
+        end
       end
     end
   end

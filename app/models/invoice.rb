@@ -12,14 +12,17 @@ class Invoice < ApplicationRecord
 
   has_many :invoice_items, dependent: :destroy
 
-  accepts_nested_attributes_for :invoice_items, 
-                              allow_destroy: true, 
-                              reject_if: proc {|attr| attr['part_id'].blank? || attr['quantity'].blank? }
+  accepts_nested_attributes_for :invoice_items,
+                                allow_destroy: true,
+                                reject_if: proc { |attr| attr['part_id'].blank? || attr['quantity'].blank? }
 
   private
+
   def invoice_items_count
+    return if invoice_items.any?
+
     errors.add(
       :base, 'You cannot create an invoice without any items'
-    ) if invoice_items.none?
+    )
   end
 end
