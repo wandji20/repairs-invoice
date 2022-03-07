@@ -8,11 +8,14 @@ class InvoicesController < ApplicationController
   def create
     @invoice = Invoice.new(invoice_params)
     if @invoice.save
-      flash[:notice] = 'Invoice successfully crreated'
+      flash.now[:notice] = 'Invoice successfully crreated'
       redirect_to root_path
     else
-      flash[:alert] = 'Something went wrong'
-      render :new
+      respond_to do |format|
+        # flash[:alert] = 'Something went wrong'
+        format.turbo_stream { render turbo_stream: turbo_stream.update('form-errors', partial: 'shared/error_messages', locals: { resource: @invoice}) }
+        format.html { render :new }
+      end
     end
   end
 
