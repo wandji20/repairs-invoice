@@ -1,4 +1,4 @@
-<div class="container ">
+<div class="container mb-3" data-controller="grand-total">
   <h3>New Invoice</h3>
   <%= form_with model: @invoice do |form| %>
     <%= render "shared/error_messages", resource: @invoice %>
@@ -48,10 +48,22 @@
       <% end %>
 
       <div data-nested-form-target="add_invoice_item" class="w-100 text-end">
-        <%= link_to 'Add Part', '#', data: { action: "click->nested-form#add_association"}, class: 'btn btn-primary text-decoration-none text-light' %>
+        <%= link_to 'Add Part', '#', 
+          data: { action: "nested-form#add_association "},
+          class: 'btn btn-primary text-decoration-none text-light' 
+        %>
       </div>
     </div>
 
+    <div>
+      <p>
+        <span>Grand Total</span>
+        <span class="ms-4">
+          <small>$</small>
+          <small data-grand-total-target="total"></small>
+        </span>
+      </p>
+    </div>
 
     <div class="actions mt-3">
       <%= form.submit "Create", class: "btn btn-primary" %>

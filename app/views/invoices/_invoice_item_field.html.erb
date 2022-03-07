@@ -14,7 +14,7 @@
           ),  
           {class: 'custom-select'},
           "data-invoice-calculations-target": "part",
-          data: { action: "change->invoice-calculations#calculate_subtotal"}
+          data: { action: "change->invoice-calculations#calculate_subtotal change->grand-total#compute_grand_total"}
       %>
     </div>
 
@@ -22,17 +22,17 @@
         <%= form.label :quantity, class: 'form-label col-12' %><br>
         <span 
           class="btn-secondary btn" 
-          data-action="click->invoice-calculations#subtract_quantity"
+          data-action="click->invoice-calculations#subtract_quantity click->grand-total#compute_grand_total"
         >
           -
         </span>
         <%= form.number_field :quantity,
           class: 'form-control w-25', 
-          "data-invoice-calculations-target": "quantity" 
+          "data-invoice-calculations-target": "quantity"
         %>
         <span 
           class="btn-secondary btn"
-          data-action="click->invoice-calculations#add_quantity"
+          data-action="click->invoice-calculations#add_quantity click->grand-total#compute_grand_total"
         >
           +
         </span>
@@ -40,7 +40,14 @@
     <div class="d-flex justify-content-between align-items-center">
       <span>Subtotal</span>
 
-      <span data-invoice-calculations-target="subtotal" class="subtotal"></span>
+      <span  class="subtotal">
+        <small>$</small>
+        <small
+          data-invoice-calculations-target="subtotal"
+          data-grand-total-target="subtotal"
+        >
+        </small>
+      </span>
     </div>
   </div>
   <span class="position-absolute remove-item">
