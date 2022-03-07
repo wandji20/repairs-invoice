@@ -10,7 +10,7 @@
         <span class="col-2 p-0 text-center">Qty</span>
         <span class="col-3 p-0 text-center">Subtotal</span>
       </h6>
-      <%= render invoice.invoice_items %>
+      <%= render invoice.invoice_items.includes(:part) %>
     </div>
     <div class="d-flex justify-content-end pe-3 mt-2">
       <span class="me-2">Total</span>

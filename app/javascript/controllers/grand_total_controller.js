@@ -16,8 +16,7 @@ export default class extends Controller {
     this.compute_grand_total()
   }
 
-  compute_grand_total(event) {
-    event.preventDefault()
+  compute_grand_total() {
     this.totalValue = 0
     const subtotals = this.subtotalTargets;
     subtotals.forEach((item) => {

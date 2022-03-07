@@ -26,7 +26,7 @@
         >
           -
         </button>
-        <%= form.number_field :quantity,
+        <%= form.text_field :quantity, min: 1,
           class: 'form-control w-25', 
           "data-invoice-calculations-target": "quantity"
         %>

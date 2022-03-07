@@ -26,6 +26,7 @@ feature 'creating an invoice' do
     click_button '+'
     click_button 'Create Invoice'
     expect(page).to have_content '9000'
+    expect(page).to have_content 'Invoice successfully created'
   end
 
   it 'creates a new invoice', js: true do

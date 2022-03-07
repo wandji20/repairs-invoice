@@ -1,24 +1,57 @@
-# README
+# Invoice App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> As an automobile repairer, it is nice to send invoices to customers after completin any form of repairs. This project helps automobile repairers to create invoices and send to clients by simply selecting client info from dropdown, adding parts from dropdown and using buttons to update quatity while having realtime update of cost of repairs
 
-Things you may want to cover:
+## Built With
 
-* Ruby version
+- Ruby on Rails
+- Stimulus
+- Turbo-rails
+- Redis
+- Sidekiq
+- HTML/CSS
 
-* System dependencies
+## Live Demo (if available)
 
-* Configuration
+[Live Demo Link](https://livedemo.com)
 
-* Database creation
+## Getting Started
 
-* Database initialization
+To get a local copy up and running follow these simple example steps.
 
-* How to run the test suite
+### Prerequisites
 
-* Services (job queues, cache servers, search engines, etc.)
+- ruby v2.7 and above
+- rails v6 and above
+- Redis installed locally
 
-* Deployment instructions
+### Setup
 
-* ...
+> Open your terminal and run the following commands <br> > `git clonehttps://github.com/wandji20/repairs-invoice.git` <br> > `cd repairs-invoice` <br>
+
+### Install
+
+run `bundle install`
+
+### Usage
+
+run `rails s` <br>
+Open `localhoost:3000` to see project in action
+
+## Author
+
+👤 Wandji Bertrand
+
+- Github: [@wandji20](https://github.com/wandji20)
+- Twitter: [@wandjibertrand](https://twitter.com/wandjibertrand)
+- Linkedin: [Linkedin](https://www.linkedin.com/in/wandji-bertrand/)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](../../issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
