@@ -1,4 +1,6 @@
-<div class="nested-field position-relative border p-1 mb-2">
+<div class="nested-field position-relative border p-1 mb-2"
+   data-controller="invoice-calculations"
+>
   <div class="form-group">
     <div>
       <%= form.hidden_field :_destroy %>
@@ -6,7 +8,14 @@
 
     <div class="mb-2">
       <%= form.label :select_part, class: '' %> <br />
-      <%= form.collection_select :part_id, Part.all, :id, :name, class: 'custom-select' %>
+      <%= form.select :part_id, 
+          options_for_select( 
+            Part.all.map {|p| [p.name, p.id, { 'data-unit_price': p.price }]}
+          ),  
+          {class: 'custom-select'},
+          "data-invoice-calculations-target": "part",
+          data: { action: "change->invoice-calculations#calculate_subtotal"}
+      %>
     </div>
 
     <div class="mb-2 d-flex flex-wrap">
@@ -28,8 +37,11 @@
           +
         </span>
     </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <span>Subtotal</span>
 
-
+      <span data-invoice-calculations-target="subtotal" class="subtotal"></span>
+    </div>
   </div>
   <span class="position-absolute remove-item">
     <%= link_to 'Remove', "#", data: { action: 'click->nested-form#remove_association'}, class: 'btn btn-danger text-decoration-none text-light p-0 px-1' %>
