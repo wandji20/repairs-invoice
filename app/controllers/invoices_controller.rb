@@ -9,7 +9,7 @@ class InvoicesController < ApplicationController
   def create
     @invoice = Invoice.new(invoice_params)
     if @invoice.save
-      flash.now[:notice] = 'Invoice successfully crreated'
+      flash.now[:notice] = 'Invoice successfully created'
       redirect_to root_path
     else
       respond_to do |format|

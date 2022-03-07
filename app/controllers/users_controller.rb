@@ -17,6 +17,7 @@ class UsersController < ApplicationController
             'form-errors', partial: 'shared/error_messages', locals: { resource: @user }
           )
         end
+        format.html { render :new }
       end
     end
   end
