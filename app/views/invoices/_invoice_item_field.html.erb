@@ -1,0 +1,56 @@
+<div class="nested-field position-relative border p-1 my-2"
+   data-controller="invoice-calculations"
+>
+  <div class="form-group">
+    <div>
+      <%= form.hidden_field :_destroy %>
+    </div>
+
+    <div class="mb-2">
+      <%= form.label :select_part, class: '' %> <br />
+      <%= form.select :part_id, 
+          options_for_select( 
+            Part.by_name.map {|p| [p.name, p.id, { 'data-unit_price': p.price }]}
+          ),  
+          {class: 'custom-select'},
+          "data-invoice-calculations-target": "part",
+          data: { action: "change->invoice-calculations#calculate_subtotal change->grand-total#compute_grand_total"}
+      %>
+    </div>
+
+    <div class="mb-2 d-flex flex-wrap">
+        <%= form.label :quantity, class: 'form-label col-12' %><br>
+        <span 
+          class="btn-secondary btn" 
+          data-action="click->invoice-calculations#subtract_quantity click->grand-total#compute_grand_total"
+        >
+          -
+        </span>
+        <%= form.number_field :quantity,
+          class: 'form-control w-25', 
+          "data-invoice-calculations-target": "quantity"
+        %>
+        <span 
+          class="btn-secondary btn"
+          data-action="click->invoice-calculations#add_quantity click->grand-total#compute_grand_total"
+        >
+          +
+        </span>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <span>Subtotal</span>
+
+      <span  class="subtotal">
+        <small>$</small>
+        <small
+          data-invoice-calculations-target="subtotal"
+          data-grand-total-target="subtotal"
+        >
+        </small>
+      </span>
+    </div>
+  </div>
+  <span class="position-absolute remove-item">
+    <%= link_to 'Remove', "#", data: { action: 'click->nested-form#remove_association'}, class: 'btn btn-danger text-decoration-none text-light p-0 px-1' %>
+  </span>
+</div>

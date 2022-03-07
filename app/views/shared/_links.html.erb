@@ -1,0 +1,9 @@
+<div class="mt-2">
+  <%- if controller_name == 'users' %>
+    <%= link_to "Log in", new_session_path, class: 'text-decoration-none' %><br />
+  <% end %>
+
+  <%- if controller_name == 'sessions' %>
+    <%= link_to "Sign up", new_user_path, class: 'text-decoration-none' %><br />
+  <% end %>
+</div>

@@ -1,0 +1,72 @@
+<div class="container mb-3" data-controller="grand-total">
+  <h3>New Invoice</h3>
+  <%= form_with model: @invoice do |form| %>
+    <%= render "shared/error_messages", resource: @invoice %>
+    <div data-controller="populate-name-email">
+       <div class="field mb-3">
+        <%= form.label :select_user, 
+                class: "form-label mb-2"
+        %><br />
+        <%= form.select :user_id, 
+          options_for_select( 
+            User.by_username.map {|u| [u.username, u.id, { 'data-email': u.email }]}
+          ), 
+          {class: "custom-select"}, 
+          "data-populate-name-email-target": "user",
+          data: {action: "change->populate-name-email#populate"}
+        %>
+      </div>
+      <div class="field mb-3">
+        <%= form.label :name, class: "form-label" %><br />
+        <%= form.text_field :name, 
+                    autofocus: true,
+                    autocomplete: "email",
+                    class: "form-control",
+                    'data-populate-name-email-target': "name"
+        %>
+      </div>
+      <div class="field mb-3">
+        <%= form.label :email, class: "form-label" %><br />
+        <%= form.email_field :email, 
+          autofocus: true,
+          autocomplete: "email", 
+          class: "form-control",
+          'data-populate-name-email-target': "email"
+        %>
+      </div>
+    </div>
+    <h4>Parts</h4>
+    <div data-controller="nested-form">
+      <template data-nested-form-target="template">
+        <%= form.fields_for :invoice_items, InvoiceItem.new, child_index: 'TEMPLATE_RECORD' do |invoice_item| %>
+          <%= render 'invoice_item_field', form: invoice_item %>
+        <% end %>
+      </template>
+
+      <%= form.fields_for :invoice_items do |invoice_item| %>
+        <%= render 'invoice_item_field', form: invoice_item %>
+      <% end %>
+
+      <div data-nested-form-target="add_invoice_item" class="w-100 text-end">
+        <%= link_to 'Add Part', '#', 
+          data: { action: "nested-form#add_association "},
+          class: 'btn btn-primary text-decoration-none text-light' 
+        %>
+      </div>
+    </div>
+
+    <div>
+      <p>
+        <span>Grand Total</span>
+        <span class="ms-4">
+          <small>$</small>
+          <small data-grand-total-target="total"></small>
+        </span>
+      </p>
+    </div>
+
+    <div class="actions mt-3">
+      <%= form.submit "Create Invoice", class: "btn btn-primary w-100" %>
+    </div>
+  <% end %>
+</div>
