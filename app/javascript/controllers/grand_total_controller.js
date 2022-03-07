@@ -20,7 +20,7 @@ export default class extends Controller {
     this.totalValue = 0
     const subtotals = this.subtotalTargets;
     subtotals.forEach((item) => {
-      this.totalValue += Number(item.innerHTML)
+        this.totalValue += Number(item.innerHTML)
     });
     this.show_grand_total()
   };

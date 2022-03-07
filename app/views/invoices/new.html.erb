@@ -9,7 +9,7 @@
         %><br />
         <%= form.select :user_id, 
           options_for_select( 
-            User.where(admin: false).map {|u| [u.username, u.id, { 'data-email': u.email }]}
+            User.by_username.map {|u| [u.username, u.id, { 'data-email': u.email }]}
           ), 
           {class: "custom-select"}, 
           "data-populate-name-email-target": "user",

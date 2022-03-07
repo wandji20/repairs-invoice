@@ -5,4 +5,6 @@ class User < ApplicationRecord
 
   has_many :invoices
   has_secure_password
+
+  scope :by_username, -> { where(admin: false).order(:username) }
 end

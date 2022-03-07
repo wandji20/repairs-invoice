@@ -10,7 +10,7 @@
       <%= form.label :select_part, class: '' %> <br />
       <%= form.select :part_id, 
           options_for_select( 
-            Part.all.map {|p| [p.name, p.id, { 'data-unit_price': p.price }]}
+            Part.by_name.map {|p| [p.name, p.id, { 'data-unit_price': p.price }]}
           ),  
           {class: 'custom-select'},
           "data-invoice-calculations-target": "part",
