@@ -2,7 +2,8 @@ class InvoicesController < ApplicationController
   before_action :verify_admin, except: :index
 
   def index
-    @invoices = Invoice.includes(:invoice_items)
+    @invoices = current_user.admin? ? Invoice.all : current_user.invoices
+    @invoices.includes(:invoice_items)
   end
 
   def create

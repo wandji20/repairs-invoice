@@ -11,8 +11,13 @@ class UsersController < ApplicationController
       flash[:notice] = 'Account successfully created'
       redirect_to root_path
     else
-      flash[:alert] = 'Something went wrong'
-      render :new
+      respond_to do |format|
+        format.turbo_stream { 
+          render turbo_stream: turbo_stream.update(
+            'form-errors', partial: 'shared/error_messages', locals: { resource: @user}
+          )
+        }
+      end
     end
   end
 

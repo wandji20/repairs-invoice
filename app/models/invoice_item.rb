@@ -5,6 +5,8 @@ class InvoiceItem < ApplicationRecord
   belongs_to :invoice
 
   validates :quantity, numericality: { greater_than_or_equal_to: 1 }
+
+  delegate :name, to: :part
   delegate :price, to: :part, prefix: 'unit'
 
   def set_subtotal
