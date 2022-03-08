@@ -1,6 +1,8 @@
 # Invoice App
 
-> As an automobile repairer, it is nice to send invoices to customers after completin any form of repairs. This project helps automobile repairers to create invoices and send to clients by simply selecting client info from dropdown, adding parts from dropdown and using buttons to update quatity while having realtime update of cost of repairs
+> As an automobile repairer, it is nice to send invoices to customers via email after completing any form of repairs. This project helps automobile repairers to create invoices and send to clients by simply selecting client info from dropdown, adding parts from dropdown and using buttons to update quatity while having realtime update of cost of repairs
+
+![](/app/assets/images/screenshot.png)
 
 ## Built With
 
@@ -11,9 +13,12 @@
 - Sidekiq
 - HTML/CSS
 
-## Live Demo (if available)
+## Live Demo
 
 [Live Demo Link](https://repairs-invoice-app.herokuapp.com)
+
+> admin email: 'sugar@email.com' <br>
+> admin password: 'password'
 
 ## Getting Started
 
