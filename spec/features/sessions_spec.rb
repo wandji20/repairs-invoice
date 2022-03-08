@@ -22,7 +22,6 @@ feature 'Signing in' do
   given(:other_user) do
     User.create(
       email: 'other@example.com',
-      password: 'rousel',
       username: 'othername',
       password: 'rousel',
       password_confirmation: 'rousel'

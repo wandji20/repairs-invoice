@@ -11,7 +11,8 @@
           options_for_select( 
             User.by_username.map {|u| [u.username, u.id, { 'data-email': u.email }]}
           ), 
-          {class: "custom-select"}, 
+          {},
+          class: "w-100", 
           "data-populate-name-email-target": "user",
           data: {action: "change->populate-name-email#populate"}
         %>
@@ -56,7 +57,7 @@
     </div>
 
     <div>
-      <p>
+      <p class="h4">
         <span>Grand Total</span>
         <span class="ms-4">
           <small>$</small>

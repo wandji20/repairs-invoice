@@ -19,6 +19,7 @@ class Invoice < ApplicationRecord
   def grand_total
     invoice_items.sum(:subtotal)
   end
+
   private
 
   def invoice_items_count

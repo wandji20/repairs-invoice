@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+# rubocop:disable Metrics/BlockLength
 feature 'creating an invoice' do
   before(:each) do
     User.create(
@@ -38,3 +38,5 @@ feature 'creating an invoice' do
     expect(page).to have_content 'You cannot create an invoice without any items'
   end
 end
+
+# rubocop:enable Metrics/BlockLength
