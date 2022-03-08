@@ -3,7 +3,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :password_confirmation, presence: true
 
-  has_many :invoices
+  has_many :invoices, dependent: :nullify
   has_secure_password
 
   scope :by_username, -> { where(admin: false).order(:username) }
