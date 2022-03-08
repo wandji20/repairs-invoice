@@ -1,0 +1,11 @@
+<h4>Hi <%= @invoice.name || '' %></h4>
+<p>You got a new Invoice from Fred Autos!</p>
+<p>
+  Invoice Details<br>
+  --------------------------
+</p>
+<p>Name: <%= @invoice.name %></p>
+<p>Email: <%= @invoice.email %></p>
+<p>Amount: <%= @invoice.grand_total %></p>
+
+<p><%= link_to 'See details', invoices_url %></p>

@@ -2,14 +2,15 @@ class InvoicesController < ApplicationController
   before_action :verify_admin, except: :index
 
   def index
-    @invoices = current_user.admin? ? Invoice.all : current_user.invoices
-    @invoices.includes(:invoice_items)
+    records = current_user.admin? ? Invoice.all : current_user.invoices
+    @invoices = records.order(created_at: :desc).includes(:invoice_items)
   end
 
   def create
     @invoice = Invoice.new(invoice_params)
     if @invoice.save
-      flash.now[:notice] = 'Invoice successfully crreated'
+      flash[:notice] = 'Invoice successfully created'
+      InvoiceMailer.send_invoice(@invoice.id).deliver_later
       redirect_to root_path
     else
       respond_to do |format|

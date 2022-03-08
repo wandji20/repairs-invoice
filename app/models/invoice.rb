@@ -1,5 +1,5 @@
 class Invoice < ApplicationRecord
-  belongs_to :user, optional: false
+  belongs_to :user, optional: true
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
@@ -15,6 +15,10 @@ class Invoice < ApplicationRecord
   accepts_nested_attributes_for :invoice_items,
                                 allow_destroy: true,
                                 reject_if: proc { |attr| attr['part_id'].blank? || attr['quantity'].blank? }
+
+  def grand_total
+    invoice_items.sum(:subtotal)
+  end
 
   private
 

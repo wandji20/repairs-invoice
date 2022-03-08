@@ -7,12 +7,14 @@ export default class extends Controller {
     this.calculate_subtotal()
   }
   
-  add_quantity() {
+  add_quantity(event) {
+    event.preventDefault()
     this.quantityTarget.value = parseFloat(this.quantityTarget.value) + 1;
     this.calculate_subtotal();
   };
 
-  subtract_quantity() {
+  subtract_quantity(event) {
+    event.preventDefault()
     if (parseFloat(this.quantityTarget.value) > 1) {
       this.quantityTarget.value = parseFloat(this.quantityTarget.value) - 1;
       this.calculate_subtotal();

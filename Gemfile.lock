@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 8cb62c6ad1076c932220e1063e5d4e90840ed6b9
+  revision: 7fd3d97f23d5da18a11765f406ef2113fae55d43
   branch: master
   specs:
-    faker (2.19.0)
+    faker (2.20.0)
       i18n (>= 1.8.11, < 2)
 
 GEM
@@ -88,8 +88,13 @@ GEM
       xpath (~> 3.2)
     childprocess (4.1.0)
     concurrent-ruby (1.1.9)
+    connection_pool (2.2.5)
     crass (1.0.6)
     diff-lcs (1.5.0)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
@@ -217,6 +222,10 @@ GEM
     semantic_range (3.0.0)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
+    sidekiq (6.4.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     spring (4.0.0)
     sprockets (4.0.3)
       concurrent-ruby (~> 1.0)
@@ -265,6 +274,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  dotenv-rails
   factory_bot_rails
   faker!
   jbuilder (~> 2.7)
@@ -273,12 +283,13 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4, >= 6.1.4.6)
-  redis (~> 4.0)
+  redis
   rspec-rails (~> 5.0.0)
   rubocop (>= 1.0, < 2.0)
   sass-rails (>= 6)
   selenium-webdriver
   shoulda-matchers (~> 5.0)
+  sidekiq
   spring
   turbo-rails
   turbolinks (~> 5)
