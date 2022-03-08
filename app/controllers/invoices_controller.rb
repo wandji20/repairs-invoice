@@ -10,6 +10,7 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new(invoice_params)
     if @invoice.save
       flash[:notice] = 'Invoice successfully created'
+      InvoiceMailer.send_invoice(@invoice.id).deliver_later
       redirect_to root_path
     else
       respond_to do |format|

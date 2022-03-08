@@ -1,0 +1,11 @@
+Hi <%= @invoice.name || '' %>
+
+You got a new Invoice from Fred Autos!
+
+  Invoice Details<br>
+  --------------------------
+
+Name: <%= @invoice.name %>
+Email: <%= @invoice.email %>
+Amount: <%= @invoice.grand_total %>
+<%= link_to 'See details', invoices_url %>

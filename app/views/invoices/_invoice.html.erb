@@ -14,7 +14,7 @@
     </div>
     <div class="d-flex justify-content-end pe-3 mt-2">
       <span class="me-2">Total</span>
-      <span><%= invoice.invoice_items.sum(:subtotal) %></span>
+      <span><%= invoice.grand_total %></span>
     </div>
   </div>
 </div>

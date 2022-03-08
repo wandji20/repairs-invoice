@@ -16,6 +16,9 @@ class Invoice < ApplicationRecord
                                 allow_destroy: true,
                                 reject_if: proc { |attr| attr['part_id'].blank? || attr['quantity'].blank? }
 
+  def grand_total
+    invoice_items.sum(:subtotal)
+  end
   private
 
   def invoice_items_count
